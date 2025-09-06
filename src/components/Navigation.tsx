@@ -27,7 +27,7 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
-        isScrolled ? 'glass-card py-4 backdrop-blur-xl' : 'py-8'
+        isScrolled ? 'glass-card-premium py-4 backdrop-blur-xl border-b border-primary/10' : 'py-8'
       }`}
       role="navigation"
       aria-label="Main navigation"
@@ -48,10 +48,10 @@ const Navigation = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-12 font-medium text-lg" role="menubar">
+        <div className="hidden md:flex space-x-8 font-medium text-lg" role="menubar">
           <a
             href="#products"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
             role="menuitem"
             aria-label="Navigate to Products section"
             onClick={(e) => {
@@ -59,71 +59,45 @@ const Navigation = () => {
               scrollToSection('products');
             }}
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Products</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Products</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </a>
           <Link
             to="/recipes"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
             role="menuitem"
             aria-label="Navigate to Recipes page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Recipes</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Recipes</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </Link>
           <Link
             to="/wholesale"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
             role="menuitem"
             aria-label="Navigate to Wholesale page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Wholesale</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Wholesale</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </Link>
           <Link
             to="/our-story"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
             role="menuitem"
             aria-label="Navigate to Our Story page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Our Story</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Our Story</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </Link>
           <Link
             to="/contact"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
             role="menuitem"
             aria-label="Navigate to Contact page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Contact</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Contact</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </Link>
-          <a
-            href="#story"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
-            role="menuitem"
-            aria-label="Navigate to Our Story section"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('story');
-            }}
-          >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Our Story</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
-          </a>
-          <a
-            href="#contact"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
-            role="menuitem"
-            aria-label="Navigate to Contact section"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('contact');
-            }}
-          >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Contact</span>
-            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
-          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -142,87 +116,66 @@ const Navigation = () => {
 
         <Button
           onClick={() => scrollToSection('products')}
-          className="liquid-button px-10 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+          className="liquid-button px-12 py-5 text-lg font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow-subtle transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-2xl"
           aria-label="Shop now - View our product collection"
         >
-          Shop Now
+          <span className="relative z-10 tracking-wide">Shop Now</span>
+          <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
         </Button>
       </div>
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 w-full glass-card backdrop-blur-xl border-t border-primary/10 transition-all duration-300 ${
-          isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`md:hidden absolute top-full left-0 w-full glass-card-premium backdrop-blur-xl border-t border-primary/20 transition-all duration-500 ${
+          isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'
         }`}
         role="menu"
         aria-label="Mobile navigation menu"
       >
-        <div className="container mx-auto px-8 py-6 space-y-4">
+        <div className="container mx-auto px-8 py-8 space-y-3">
           <a
             href="#products"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
             role="menuitem"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection('products');
             }}
           >
-            Products
+            <span className="relative z-10 tracking-wide">Products</span>
           </a>
           <Link
             to="/recipes"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
             role="menuitem"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Recipes
+            <span className="relative z-10 tracking-wide">Recipes</span>
           </Link>
           <Link
             to="/wholesale"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
             role="menuitem"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Wholesale
+            <span className="relative z-10 tracking-wide">Wholesale</span>
           </Link>
           <Link
             to="/our-story"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
             role="menuitem"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Our Story
+            <span className="relative z-10 tracking-wide">Our Story</span>
           </Link>
           <Link
             to="/contact"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
             role="menuitem"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Contact
+            <span className="relative z-10 tracking-wide">Contact</span>
           </Link>
-          <a
-            href="#story"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
-            role="menuitem"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('story');
-            }}
-          >
-            Our Story
-          </a>
-          <a
-            href="#contact"
-            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
-            role="menuitem"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection('contact');
-            }}
-          >
-            Contact
-          </a>
         </div>
       </div>
     </nav>

@@ -235,6 +235,30 @@ All colors MUST be HSL.
   .hover-glow:hover {
     box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
   }
+
+  .hover-glow-subtle:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
+  }
+
+  .text-gradient-premium {
+    background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)), hsl(var(--accent)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card-premium {
+    background: linear-gradient(135deg, hsl(var(--card) / 0.8), hsl(var(--card) / 0.4));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: 0 8px 32px hsl(var(--primary) / 0.1);
+  }
+
+  .hover-scale-elegant:hover {
+    transform: scale(1.02);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
   
   /* Johnny Ive Inspired Keyframes */
   @keyframes fadeIn {

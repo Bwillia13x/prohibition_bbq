@@ -32,35 +32,36 @@ const products = [
 
 const ProductGrid = () => {
   return (
-    <section id="products" className="py-32 relative">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-30" />
+    <section id="products" className="py-40 relative overflow-hidden">
+      {/* Enhanced Background elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/8 rounded-full blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }} />
+      <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-primary/6 rounded-full blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '4s' }} />
       
       <div className="container mx-auto px-8 relative z-10">
-        {/* Enhanced Section Header */}
-        <div className="text-center mb-24 space-y-8">
-          <div className="space-y-4">
-            <h2 className="font-display text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight">
-              <span className="text-foreground block">Meet the</span>
-              <span className="text-primary block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        {/* Premium Section Header */}
+        <div className="text-center mb-32 space-y-12">
+          <div className="space-y-6">
+            <h2 className="font-display text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight tracking-tight animate-fade-in">
+              <span className="text-foreground block hover:text-gradient-premium transition-all duration-500">Meet the</span>
+              <span className="text-primary block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent hover:from-accent hover:via-primary hover:to-accent transition-all duration-700 animate-slide-up" style={{ animationDelay: '0.2s' }}>
                 Legendary Crew
               </span>
             </h2>
-            <div className="w-32 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto" />
+            <div className="w-48 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full mx-auto hover-scale-elegant animate-scale-in" style={{ animationDelay: '0.4s' }} />
           </div>
-          <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light">
-            Each sauce in our collection is inspired by the most notorious figures of the prohibition era, 
+          <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light animate-fade-in hover-lift" style={{ animationDelay: '0.6s' }}>
+            Each sauce in our collection is inspired by the most notorious figures of the prohibition era,
             crafted with premium ingredients and uncompromising attention to flavor.
           </p>
         </div>
 
-        {/* Enhanced Product Grid */}
-        <div className="grid lg:grid-cols-3 gap-12 mb-20" role="grid" aria-label="Product collection">
+        {/* Premium Product Grid */}
+        <div className="grid lg:grid-cols-3 gap-16 mb-24" role="grid" aria-label="Product collection">
           {products.map((product, index) => (
             <article
               key={product.id}
-              className="glass-card p-12 group hover-lift hover-scale-subtle hover-glow transition-all duration-700 focus-within:hover-lift focus-within:hover-scale-subtle focus-within:hover-glow animate-scale-in"
+              className="glass-card-premium p-16 group hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-700 focus-within:hover-lift focus-within:hover-scale-elegant focus-within:hover-glow-subtle animate-scale-in rounded-3xl relative overflow-hidden"
               style={{ animationDelay: `${index * 0.2}s` }}
               role="gridcell"
               aria-labelledby={`product-${product.id}-title`}
@@ -112,9 +113,9 @@ const ProductGrid = () => {
                   </ul>
                 </div>
 
-                {/* Enhanced CTA Button */}
+                {/* Premium CTA Button */}
                 <Button
-                  className="liquid-button w-full py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group-hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+                  className="liquid-button w-full py-5 text-lg font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow hover-scale-elegant transition-all duration-500 group-hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-2xl relative overflow-hidden"
                   aria-label={`Add ${product.name} to cart for $12.99`}
                   onClick={(e) => {
                     // Simulate loading state
@@ -128,7 +129,8 @@ const ProductGrid = () => {
                     }, 1500);
                   }}
                 >
-                  Add to Cart - $12.99
+                  <span className="relative z-10 tracking-wide">Add to Cart - $12.99</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
                 </Button>
               </div>
             </article>
