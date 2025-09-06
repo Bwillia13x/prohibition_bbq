@@ -1,0 +1,356 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Prohibition BBQ - Liquid Glass Design System 
+Inspired by Apple's premium aesthetics with vintage gangster charm
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors - Rich, premium tones */
+    --background: 20 15% 8%;
+    --foreground: 45 25% 95%;
+
+    /* Glass morphism cards */
+    --card: 20 15% 12%;
+    --card-foreground: 45 20% 92%;
+
+    --popover: 20 15% 10%;
+    --popover-foreground: 45 20% 92%;
+
+    /* Primary - Amber like the BBQ sauce */
+    --primary: 35 85% 55%;
+    --primary-foreground: 20 15% 8%;
+    
+    /* Secondary - Warm sepia tones */
+    --secondary: 30 25% 25%;
+    --secondary-foreground: 45 25% 95%;
+
+    /* Muted - Glass effect backgrounds */
+    --muted: 20 15% 15%;
+    --muted-foreground: 40 15% 70%;
+
+    /* Accent - Gold highlights */
+    --accent: 40 95% 65%;
+    --accent-foreground: 20 15% 8%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 45 25% 95%;
+
+    /* Glass borders and inputs */
+    --border: 30 20% 20%;
+    --input: 20 15% 18%;
+    --ring: 35 85% 55%;
+
+    --radius: 1.5rem;
+
+    /* Premium glass effects */
+    --glass-bg: 20 15% 10%;
+    --glass-border: 30 25% 25%;
+    --glass-shadow: 20 15% 5%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(35 85% 55%), hsl(25 75% 45%));
+    --gradient-glass: linear-gradient(135deg, hsl(20 15% 12% / 0.9), hsl(30 20% 18% / 0.7));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(35 85% 15%) 0%, hsl(20 15% 8%) 50%, hsl(20 15% 5%) 100%);
+    
+    /* Shadows for liquid glass effect */
+    --shadow-glass: 0 8px 32px 0 hsl(20 15% 5% / 0.37);
+    --shadow-glow: 0 0 40px hsl(35 85% 55% / 0.2);
+    --shadow-premium: 0 25px 50px -12px hsl(20 15% 5% / 0.5);
+    
+    /* Typography - Johnny Ive Inspired */
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Typography Scale - Golden Ratio Based */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.875rem;  /* 30px */
+    --text-4xl: 2.25rem;   /* 36px */
+    --text-5xl: 3rem;      /* 48px */
+    --text-6xl: 3.75rem;   /* 60px */
+    --text-7xl: 4.5rem;    /* 72px */
+    --text-8xl: 6rem;      /* 96px */
+    --text-9xl: 8rem;      /* 128px */
+
+    /* Spacing Scale - 8px Grid System */
+    --space-1: 0.25rem;    /* 4px */
+    --space-2: 0.5rem;     /* 8px */
+    --space-3: 0.75rem;    /* 12px */
+    --space-4: 1rem;       /* 16px */
+    --space-5: 1.25rem;    /* 20px */
+    --space-6: 1.5rem;     /* 24px */
+    --space-8: 2rem;       /* 32px */
+    --space-10: 2.5rem;    /* 40px */
+    --space-12: 3rem;      /* 48px */
+    --space-16: 4rem;      /* 64px */
+    --space-20: 5rem;      /* 80px */
+    --space-24: 6rem;      /* 96px */
+    --space-32: 8rem;      /* 128px */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Glass morphism utilities */
+  .glass {
+    background: var(--gradient-glass);
+    border: 1px solid hsl(var(--glass-border) / 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-glass);
+  }
+  
+  .glass-card {
+    @apply glass rounded-3xl;
+    border: 1px solid hsl(var(--border) / 0.1);
+  }
+  
+  .liquid-button {
+    @apply relative overflow-hidden rounded-2xl;
+    background: var(--gradient-primary);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .liquid-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), var(--shadow-premium);
+  }
+  
+  .liquid-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--accent) / 0.4), transparent);
+    transition: left 0.8s;
+  }
+  
+  .liquid-button:hover::before {
+    left: 100%;
+  }
+  
+  /* Enhanced focus states */
+  .glass:focus-within {
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: var(--shadow-glass), 0 0 0 2px hsl(var(--primary) / 0.2);
+  }
+  
+  /* Navigation link styles */
+  .nav-link {
+    @apply px-4 py-2 rounded-lg transition-all duration-300;
+  }
+  
+  /* Enhanced button styles */
+  .liquid-button:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+  
+  /* Johnny Ive Inspired Animation System */
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  .animate-float-gentle {
+    animation: floatGentle 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulseSubtle 3s ease-in-out infinite;
+  }
+
+  .animate-glow-soft {
+    animation: glowSoft 3s ease-in-out infinite alternate;
+  }
+
+  /* Hover states with Johnny Ive's attention to detail */
+  .hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .hover-scale-subtle:hover {
+    transform: scale(1.02);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+  }
+  
+  /* Johnny Ive Inspired Keyframes */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(2rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes floatGentle {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes pulseSubtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes glowSoft {
+    from {
+      box-shadow: 0 0 15px hsl(var(--primary) / 0.1);
+    }
+    to {
+      box-shadow: 0 0 25px hsl(var(--primary) / 0.2), 0 0 35px hsl(var(--primary) / 0.1);
+    }
+  }
+  
+  /* Scroll behavior */
+  html {
+    scroll-padding-top: 100px;
+  }
+  
+  /* Enhanced glass morphism */
+  .glass-card:hover {
+    background: linear-gradient(135deg, hsl(20 15% 14% / 0.95), hsl(30 20% 20% / 0.8));
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Performance optimizations */
+  .glass-card, .liquid-button {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+
+  /* Enhanced mobile responsiveness */
+  @media (max-width: 768px) {
+    .glass-card {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .liquid-button {
+      transform: scale(0.98);
+    }
+
+    .liquid-button:hover {
+      transform: scale(1);
+    }
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
