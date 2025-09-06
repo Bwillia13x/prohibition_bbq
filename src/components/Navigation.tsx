@@ -125,12 +125,14 @@ const Navigation = () => {
         </button>
 
         <Button
-          onClick={() => scrollToSection('products')}
+          asChild
           className="liquid-button px-12 py-5 text-lg font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow-subtle transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-2xl"
           aria-label="Shop now - View our product collection"
         >
-          <span className="relative z-10 tracking-wide">Shop Now</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+          <Link to="/shop" className="relative z-10">
+            <span className="relative z-10 tracking-wide">Shop Now</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+          </Link>
         </Button>
       </div>
 

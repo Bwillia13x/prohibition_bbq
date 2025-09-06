@@ -9,6 +9,7 @@ import Recipes from "./pages/Recipes";
 import Wholesale from "./pages/Wholesale";
 import OurStory from "./pages/OurStory";
 import Contact from "./pages/Contact";
+import Shop from "./pages/Shop";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/recipes" element={<Recipes />} />
           <Route path="/wholesale" element={<Wholesale />} />
           <Route path="/our-story" element={<OurStory />} />
