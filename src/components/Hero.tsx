@@ -78,11 +78,30 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-8 justify-center lg:justify-start pt-6 animate-scale-in" style={{ animationDelay: '0.8s' }}>
-              <Button className="liquid-button px-20 py-7 text-xl font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow transition-all duration-500 group">
+              <Button
+                onClick={() => {
+                  const element = document.getElementById('products');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="liquid-button px-20 py-7 text-xl font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow transition-all duration-500 group"
+                aria-label="Explore our BBQ sauce collection"
+              >
                 <span className="relative z-10 tracking-wide">Explore Collection</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-15 transition-opacity duration-500 rounded-2xl" />
               </Button>
-              <Button variant="outline" className="glass-card px-20 py-7 text-xl border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all duration-700 group hover-lift">
+              <Button
+                onClick={() => {
+                  const element = document.getElementById('story');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                variant="outline"
+                className="glass-card px-20 py-7 text-xl border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all duration-700 group hover-lift"
+                aria-label="Watch our brand story"
+              >
                 <span className="group-hover:text-primary transition-colors duration-500 relative z-10 tracking-wide">Watch Our Story</span>
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               </Button>

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import prohibitionLogo from "@/assets/prohibition-bbq-logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,15 +62,24 @@ const Navigation = () => {
             <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Products</span>
             <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </a>
-          <a
-            href="/recipes"
+          <Link
+            to="/recipes"
             className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
             role="menuitem"
             aria-label="Navigate to Recipes page"
           >
             <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Recipes</span>
             <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
-          </a>
+          </Link>
+          <Link
+            to="/wholesale"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            role="menuitem"
+            aria-label="Navigate to Wholesale page"
+          >
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Wholesale</span>
+            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+          </Link>
           <a
             href="#story"
             className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
@@ -112,6 +123,7 @@ const Navigation = () => {
         </button>
 
         <Button
+          onClick={() => scrollToSection('products')}
           className="liquid-button px-10 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
           aria-label="Shop now - View our product collection"
         >
@@ -139,13 +151,22 @@ const Navigation = () => {
           >
             Products
           </a>
-          <a
-            href="/recipes"
+          <Link
+            to="/recipes"
             className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
             role="menuitem"
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             Recipes
-          </a>
+          </Link>
+          <Link
+            to="/wholesale"
+            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            role="menuitem"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Wholesale
+          </Link>
           <a
             href="#story"
             className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
