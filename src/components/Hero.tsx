@@ -52,13 +52,13 @@ const Hero = () => {
       <div className="container mx-auto px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Johnny Ive Inspired Text Content */}
-          <div className="text-center lg:text-left space-y-12 animate-fade-in">
-            {/* Large Logo */}
-            <div className="flex justify-center lg:justify-start animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="text-center lg:text-left space-y-16 animate-fade-in">
+            {/* Massive Centered Logo */}
+            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
               <img
                 src={prohibitionLogo}
                 alt="Prohibition BBQ Logo"
-                className="h-24 lg:h-32 xl:h-40 w-auto hover:scale-105 transition-transform duration-500"
+                className="h-72 lg:h-96 xl:h-[28rem] 2xl:h-[32rem] w-auto hover:scale-105 transition-transform duration-700 drop-shadow-2xl filter"
               />
             </div>
 
