@@ -80,6 +80,24 @@ const Navigation = () => {
             <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Wholesale</span>
             <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
           </Link>
+          <Link
+            to="/our-story"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            role="menuitem"
+            aria-label="Navigate to Our Story page"
+          >
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Our Story</span>
+            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+          </Link>
+          <Link
+            to="/contact"
+            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
+            role="menuitem"
+            aria-label="Navigate to Contact page"
+          >
+            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wider">Contact</span>
+            <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+          </Link>
           <a
             href="#story"
             className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg px-3 py-2 hover-lift"
@@ -166,6 +184,22 @@ const Navigation = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Wholesale
+          </Link>
+          <Link
+            to="/our-story"
+            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            role="menuitem"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Our Story
+          </Link>
+          <Link
+            to="/contact"
+            className="block py-3 px-4 text-lg font-medium hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10"
+            role="menuitem"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Contact
           </Link>
           <a
             href="#story"

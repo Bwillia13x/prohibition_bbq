@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBottles from "@/assets/hero-bottles-stock.jpg";
 import prohibitionLogo from "@/assets/prohibition-bbq-logo.png";
@@ -52,16 +53,7 @@ const Hero = () => {
       <div className="container mx-auto px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Johnny Ive Inspired Text Content */}
-          <div className="text-center lg:text-left space-y-16 animate-fade-in">
-            {/* Massive Centered Logo */}
-            <div className="flex justify-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
-              <img
-                src={prohibitionLogo}
-                alt="Prohibition BBQ Logo"
-                className="h-72 lg:h-96 xl:h-[28rem] 2xl:h-[32rem] w-auto hover:scale-105 transition-transform duration-700 drop-shadow-2xl filter"
-              />
-            </div>
-
+          <div className="text-center lg:text-left space-y-12 animate-fade-in">
             <div className="space-y-6">
               <h1 className="font-display text-7xl lg:text-8xl xl:text-9xl font-bold leading-[0.85] tracking-tight">
                 <span className="text-foreground block animate-slide-up hover-lift">Taste the</span>
@@ -92,18 +84,15 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary opacity-0 group-hover:opacity-15 transition-opacity duration-500 rounded-2xl" />
               </Button>
               <Button
-                onClick={() => {
-                  const element = document.getElementById('story');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                asChild
                 variant="outline"
                 className="glass-card px-20 py-7 text-xl border-2 border-primary/20 hover:border-primary/50 hover:bg-primary/5 transition-all duration-700 group hover-lift"
                 aria-label="Watch our brand story"
               >
-                <span className="group-hover:text-primary transition-colors duration-500 relative z-10 tracking-wide">Watch Our Story</span>
-                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <Link to="/our-story">
+                  <span className="group-hover:text-primary transition-colors duration-500 relative z-10 tracking-wide">Watch Our Story</span>
+                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -122,9 +111,9 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Enhanced floating elements with hover interactions */}
+            {/* Enhanced floating elements with slower, more subtle animations */}
             <div
-              className="absolute -bottom-6 -left-6 glass-card p-6 animate-bounce shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:-rotate-12 cursor-pointer"
+              className="absolute -bottom-6 -left-6 glass-card p-6 animate-bounce-slow shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:-rotate-12 cursor-pointer"
               style={{ animationDelay: '3s' }}
               onMouseEnter={(e) => e.currentTarget.style.animationPlayState = 'paused'}
               onMouseLeave={(e) => e.currentTarget.style.animationPlayState = 'running'}
@@ -132,7 +121,7 @@ const Hero = () => {
               <span className="text-3xl hover:scale-125 transition-transform duration-300">🔥</span>
             </div>
             <div
-              className="absolute top-1/2 -right-4 glass-card p-4 animate-pulse opacity-70 hover:opacity-100 transition-opacity duration-300 hover:scale-110 cursor-pointer"
+              className="absolute top-1/2 -right-4 glass-card p-4 animate-pulse-slow opacity-70 hover:opacity-100 transition-opacity duration-300 hover:scale-110 cursor-pointer"
               style={{ animationDelay: '2s' }}
             >
               <span className="text-2xl hover:animate-spin">✨</span>
