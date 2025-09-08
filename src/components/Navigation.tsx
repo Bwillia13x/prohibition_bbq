@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import prohibitionLogo from "@/assets/prohibition-bbq-logo.png";
+import { Badge } from "@/components/ui/badge";
+import { useCart } from "../contexts/CartContext";
+import prohibitionLogo from "/brand logo/prohibition_bbq_logo.png";
+import { ShoppingCart } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { state } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {

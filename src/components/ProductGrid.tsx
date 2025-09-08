@@ -1,36 +1,52 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 import babyFaceBottle from "@/assets/baby-face-bottle-stock.jpg";
 import godfatherRibs from "@/assets/godfather-ribs-stock.jpg";
 import bugsyBottle from "@/assets/bugsy-bottle-stock.jpg";
 
 const products = [
   {
-    id: 1,
+    id: "baby-face",
     name: "Baby Face",
     subtitle: "Prohibition BBQ",
     description: "Sweet & smoky with a hint of danger. This sauce captures the charm and complexity of the notorious Baby Face Nelson.",
     features: ["Sweet Molasses Base", "Hickory Smoke", "Brown Sugar Finish"],
     image: babyFaceBottle,
+    price: 12.99
   },
   {
-    id: 2,
+    id: "godfather",
     name: "The Godfather",
-    subtitle: "Prohibition BBQ", 
+    subtitle: "Prohibition BBQ",
     description: "Rich, bold, and commanding respect. A sauce worthy of the most powerful families in BBQ history.",
     features: ["Tomato & Bourbon", "Garlic & Herbs", "Premium Spices"],
     image: godfatherRibs,
+    price: 12.99
   },
   {
-    id: 3,
+    id: "bugsy",
     name: "Bugsy",
     subtitle: "Prohibition BBQ",
     description: "Sharp, sophisticated, and unforgettable. Like its namesake, this sauce leaves a lasting impression.",
     features: ["Tangy Vinegar Base", "Black Pepper", "Citrus Notes"],
     image: bugsyBottle,
+    price: 12.99
   }
 ];
 
 const ProductGrid = () => {
+  const { addItem } = useCart();
+
+  const handleAddToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      subtitle: product.subtitle,
+      price: product.price,
+      image: product.image
+    });
+  };
   return (
     <section id="products" className="py-40 relative overflow-hidden">
       {/* Enhanced Background elements */}
@@ -117,17 +133,7 @@ const ProductGrid = () => {
                 <Button
                   className="liquid-button w-full py-5 text-lg font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow hover-scale-elegant transition-all duration-500 group-hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-2xl relative overflow-hidden"
                   aria-label={`Add ${product.name} to cart for $12.99`}
-                  onClick={(e) => {
-                    // Simulate loading state
-                    const button = e.currentTarget as HTMLButtonElement;
-                    const originalText = button.textContent;
-                    button.textContent = 'Adding...';
-                    button.disabled = true;
-                    setTimeout(() => {
-                      button.textContent = originalText;
-                      button.disabled = false;
-                    }, 1500);
-                  }}
+                  onClick={() => handleAddToCart(product)}
                 >
                   <span className="relative z-10 tracking-wide">Add to Cart - $12.99</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />

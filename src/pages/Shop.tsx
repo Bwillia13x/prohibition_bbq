@@ -2,13 +2,15 @@ import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 import babyFaceBottle from "@/assets/baby-face-bottle-stock.jpg";
 import godfatherRibs from "@/assets/godfather-ribs-stock.jpg";
 import bugsyBottle from "@/assets/bugsy-bottle-stock.jpg";
+import { ShoppingCart, Star } from "lucide-react";
 
 const Shop = () => {
-  const [cartItems, setCartItems] = useState<{[key: string]: number}>({});
+  const { state, addItem, updateQuantity } = useCart();
 
   const products = [
     {
@@ -49,33 +51,16 @@ const Shop = () => {
     }
   ];
 
-  const addToCart = (productId: string) => {
-    setCartItems(prev => ({
-      ...prev,
-      [productId]: (prev[productId] || 0) + 1
-    }));
-  };
-
-  const removeFromCart = (productId: string) => {
-    setCartItems(prev => {
-      const newCount = (prev[productId] || 0) - 1;
-      if (newCount <= 0) {
-        const {[productId]: _, ...rest} = prev;
-        return rest;
-      }
-      return { ...prev, [productId]: newCount };
+  const handleAddToCart = (product: any) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      subtitle: product.subtitle,
+      price: product.price,
+      image: product.image,
+      spicy: product.spicy,
+      size: product.size
     });
-  };
-
-  const getCartTotal = () => {
-    return Object.entries(cartItems).reduce((total, [productId, quantity]) => {
-      const product = products.find(p => p.id === productId);
-      return total + (product?.price || 0) * quantity;
-    }, 0);
-  };
-
-  const getTotalItems = () => {
-    return Object.values(cartItems).reduce((total, quantity) => total + quantity, 0);
   };
 
   const getSpicyColor = (spicy: string) => {
@@ -121,17 +106,19 @@ const Shop = () => {
       </section>
 
       {/* Cart Summary Bar */}
-      {getTotalItems() > 0 && (
+      {state.totalItems > 0 && (
         <div className="sticky top-24 z-40 mx-8 mb-8">
           <div className="glass-card-premium p-4 rounded-2xl shadow-lg">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="text-lg font-semibold">Cart: {getTotalItems()} items</div>
-                <div className="text-primary font-bold">${getCartTotal().toFixed(2)}</div>
+                <div className="text-lg font-semibold">Cart: {state.totalItems} items</div>
+                <div className="text-primary font-bold">${state.totalPrice.toFixed(2)}</div>
               </div>
-              <Button className="liquid-button px-6 py-2 text-sm font-semibold">
-                Checkout
-              </Button>
+              <Link to="/cart">
+                <Button className="liquid-button px-6 py-2 text-sm font-semibold">
+                  View Cart
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -215,8 +202,13 @@ const Shop = () => {
                   <div className="flex items-center justify-between pt-4 border-t border-primary/10">
                     <div className="flex items-center space-x-3">
                       <Button
-                        onClick={() => removeFromCart(product.id)}
-                        disabled={!cartItems[product.id]}
+                        onClick={() => {
+                          const item = state.items.find(i => i.id === product.id);
+                          if (item && item.quantity > 0) {
+                            updateQuantity(product.id, item.quantity - 1);
+                          }
+                        }}
+                        disabled={!state.items.find(i => i.id === product.id)?.quantity}
                         variant="outline"
                         size="sm"
                         className="w-8 h-8 p-0 rounded-full border-primary/30 hover:border-primary hover:bg-primary/5"
@@ -224,10 +216,10 @@ const Shop = () => {
                         -
                       </Button>
                       <span className="text-lg font-semibold w-8 text-center">
-                        {cartItems[product.id] || 0}
+                        {state.items.find(i => i.id === product.id)?.quantity || 0}
                       </span>
                       <Button
-                        onClick={() => addToCart(product.id)}
+                        onClick={() => handleAddToCart(product)}
                         size="sm"
                         className="w-8 h-8 p-0 rounded-full"
                       >
@@ -236,7 +228,7 @@ const Shop = () => {
                     </div>
 
                     <Button
-                      onClick={() => addToCart(product.id)}
+                      onClick={() => handleAddToCart(product)}
                       className="liquid-button px-6 py-3 text-sm font-semibold shadow-lg hover:shadow-xl hover-lift hover-glow hover-scale-elegant transition-all duration-500 group relative overflow-hidden"
                     >
                       <span className="relative z-10 tracking-wide">Add to Cart</span>
