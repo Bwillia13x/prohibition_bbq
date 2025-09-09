@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,43 +9,109 @@ import { ShoppingCart } from "lucide-react";
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = useCart();
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
+  // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Touch gesture handling for mobile menu
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      if (window.innerWidth < 768) {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (window.innerWidth < 768) {
+        setTouchEnd(e.targetTouches[0].clientX);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      if ((window.innerWidth < 768 && !touchStart) || !touchEnd) return;
+
+      const distance = touchStart! - touchEnd!;
+      const isLeftSwipe = distance > 50;
+      const isRightSwipe = distance < -50;
+
+      // Swipe left to open menu, swipe right to close
+      if (isLeftSwipe && !isMobileMenuOpen) {
+        setIsMobileMenuOpen(true);
+        // Haptic feedback simulation
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      } else if (isRightSwipe && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+        if (navigator.vibrate) {
+          navigator.vibrate(30);
+        }
+      }
+    };
+
+    // Click outside to close mobile menu
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart);
+    document.addEventListener("touchmove", handleTouchMove);
+    document.addEventListener("touchend", handleTouchEnd);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [touchStart, touchEnd, isMobileMenuOpen]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMobileMenuOpen(false);
   };
 
   const handleProductsClick = () => {
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       // If on homepage, scroll to products section
-      scrollToSection('products');
+      scrollToSection("products");
     } else {
       // If on other pages, navigate to homepage and scroll to products
-      navigate('/');
+      navigate("/");
       setTimeout(() => {
-        scrollToSection('products');
+        scrollToSection("products");
       }, 100);
     }
   };
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
-        isScrolled ? 'glass-card-premium py-4 backdrop-blur-xl border-b border-primary/10' : 'py-8'
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "glass-card-premium py-3 border-b border-primary/10"
+          : "py-6"
       }`}
       role="navigation"
       aria-label="Main navigation"
@@ -54,143 +120,288 @@ const Navigation = () => {
         <div className="flex items-center">
           <Link
             to="/"
-            className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg hover-lift transition-all duration-300 block"
+            className="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg transition-all duration-300 block"
             aria-label="Prohibition BBQ - Go to homepage"
           >
             <img
               src={prohibitionLogo}
               alt="Prohibition BBQ Logo"
-              className="h-12 lg:h-16 w-auto hover:scale-105 transition-transform duration-300"
+              className="h-10 lg:h-12 w-auto transition-transform duration-300"
             />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8 font-medium text-lg" role="menubar">
+        <div className="hidden md:flex space-x-1" role="menubar">
           <button
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Products section"
             onClick={handleProductsClick}
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Products</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            Products
           </button>
           <Link
             to="/recipes"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Recipes page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Recipes</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            Recipes
           </Link>
           <Link
             to="/wholesale"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Wholesale page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Wholesale</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            Wholesale
           </Link>
           <Link
             to="/our-story"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Our Story page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Our Story</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            Our Story
           </Link>
           <Link
             to="/contact"
-            className="nav-link relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-xl px-4 py-2 hover-lift hover-scale-elegant hover-glow-subtle transition-all duration-300"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Contact page"
           >
-            <span className="relative z-10 transition-all duration-500 group-hover:text-primary group-focus:text-primary group-hover:tracking-wide font-medium">Contact</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl scale-0 group-hover:scale-100 group-focus:scale-100 transition-transform duration-500" />
+            Contact
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - Touch Optimized */}
         <button
-          className="md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
-          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          className="md:hidden focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-3 min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-95 transition-transform duration-100"
+          aria-label={
+            isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isMobileMenuOpen}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => {
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+            // Haptic feedback for mobile
+            if (navigator.vibrate && window.innerWidth < 768) {
+              navigator.vibrate(20);
+            }
+          }}
+          onTouchStart={() => {
+            // Prevent double-tap zoom on mobile
+            document.body.style.touchAction = "manipulation";
+          }}
+          onTouchEnd={() => {
+            document.body.style.touchAction = "";
+          }}
         >
           <div className="w-6 h-6 flex flex-col justify-center items-center space-y-1">
-            <span className={`w-5 h-0.5 bg-primary transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-            <span className={`w-5 h-0.5 bg-primary transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-            <span className={`w-5 h-0.5 bg-primary transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
+            <span
+              className={`w-5 h-0.5 bg-primary transition-all duration-300 ${
+                isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+              }`}
+            />
+            <span
+              className={`w-5 h-0.5 bg-primary transition-all duration-300 ${
+                isMobileMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`w-5 h-0.5 bg-primary transition-all duration-300 ${
+                isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+              }`}
+            />
           </div>
         </button>
 
-        <Button
-          asChild
-          className="liquid-button px-12 py-5 text-lg font-semibold text-primary-foreground shadow-2xl hover:shadow-3xl hover-lift hover-glow-subtle transition-all duration-500 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-2xl"
-          aria-label="Shop now - View our product collection"
-        >
-          <Link to="/shop" className="relative z-10">
-            <span className="relative z-10 tracking-wide">Shop Now</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-          </Link>
-        </Button>
+        <div className="flex items-center space-x-4">
+          <Button
+            asChild
+            variant="ghost"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            aria-label="View shopping cart"
+          >
+            <Link to="/cart" className="flex items-center space-x-2">
+              <ShoppingCart className="w-4 h-4" />
+              <span className="hidden sm:inline">Cart</span>
+              {state.totalItems > 0 && (
+                <Badge
+                  variant="secondary"
+                  className="ml-1 px-1.5 py-0.5 text-xs"
+                >
+                  {state.totalItems}
+                </Badge>
+              )}
+            </Link>
+          </Button>
+          <Button
+            asChild
+            className="px-6 py-2 text-base font-medium bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] rounded-lg"
+            aria-label="Shop now - View our product collection"
+          >
+            <Link to="/shop">Shop Now</Link>
+          </Button>
+        </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Touch Enhanced */}
       <div
-        className={`md:hidden absolute top-full left-0 w-full glass-card-premium backdrop-blur-xl border-t border-primary/20 transition-all duration-500 ${
-          isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'
+        ref={mobileMenuRef}
+        className={`md:hidden absolute top-full left-0 w-full glass-card-premium border-t border-primary/10 transition-all duration-300 ${
+          isMobileMenuOpen
+            ? "opacity-100 visible translate-y-0"
+            : "opacity-0 invisible -translate-y-2"
         }`}
         role="menu"
         aria-label="Mobile navigation menu"
       >
-        <div className="container mx-auto px-8 py-8 space-y-3">
+        <div className="container mx-auto px-6 py-6 space-y-2">
           <button
-            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
             role="menuitem"
             onClick={() => {
               handleProductsClick();
               setIsMobileMenuOpen(false);
+              if (navigator.vibrate && window.innerWidth < 768) {
+                navigator.vibrate(15);
+              }
+            }}
+            onTouchStart={() => {
+              document.body.style.touchAction = "manipulation";
+            }}
+            onTouchEnd={() => {
+              document.body.style.touchAction = "";
             }}
           >
-            <span className="relative z-10 tracking-wide">Products</span>
+            Products
           </button>
           <Link
             to="/recipes"
-            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
             role="menuitem"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              if (navigator.vibrate && window.innerWidth < 768) {
+                navigator.vibrate(15);
+              }
+            }}
+            onTouchStart={() => {
+              document.body.style.touchAction = "manipulation";
+            }}
+            onTouchEnd={() => {
+              document.body.style.touchAction = "";
+            }}
           >
-            <span className="relative z-10 tracking-wide">Recipes</span>
+            Recipes
           </Link>
           <Link
             to="/wholesale"
-            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
             role="menuitem"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              if (navigator.vibrate && window.innerWidth < 768) {
+                navigator.vibrate(15);
+              }
+            }}
+            onTouchStart={() => {
+              document.body.style.touchAction = "manipulation";
+            }}
+            onTouchEnd={() => {
+              document.body.style.touchAction = "";
+            }}
           >
-            <span className="relative z-10 tracking-wide">Wholesale</span>
+            Wholesale
           </Link>
           <Link
             to="/our-story"
-            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
             role="menuitem"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              if (navigator.vibrate && window.innerWidth < 768) {
+                navigator.vibrate(15);
+              }
+            }}
+            onTouchStart={() => {
+              document.body.style.touchAction = "manipulation";
+            }}
+            onTouchEnd={() => {
+              document.body.style.touchAction = "";
+            }}
           >
-            <span className="relative z-10 tracking-wide">Our Story</span>
+            Our Story
           </Link>
           <Link
             to="/contact"
-            className="block py-4 px-6 text-lg font-medium hover:text-primary hover:bg-gradient-to-r hover:from-primary/10 hover:to-accent/10 rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/10 hover-lift hover-scale-elegant"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
             role="menuitem"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              if (navigator.vibrate && window.innerWidth < 768) {
+                navigator.vibrate(15);
+              }
+            }}
+            onTouchStart={() => {
+              document.body.style.touchAction = "manipulation";
+            }}
+            onTouchEnd={() => {
+              document.body.style.touchAction = "";
+            }}
           >
-            <span className="relative z-10 tracking-wide">Contact</span>
+            Contact
           </Link>
+          <div className="border-t border-border/50 mt-4 pt-4 space-y-2">
+            <Link
+              to="/cart"
+              className="flex items-center justify-between w-full px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] active:scale-98"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (navigator.vibrate && window.innerWidth < 768) {
+                  navigator.vibrate(15);
+                }
+              }}
+              onTouchStart={() => {
+                document.body.style.touchAction = "manipulation";
+              }}
+              onTouchEnd={() => {
+                document.body.style.touchAction = "";
+              }}
+            >
+              <div className="flex items-center space-x-3">
+                <ShoppingCart className="w-5 h-5" />
+                <span>Cart</span>
+              </div>
+              {state.totalItems > 0 && (
+                <Badge
+                  variant="secondary"
+                  className="px-2 py-1 text-xs font-medium"
+                >
+                  {state.totalItems}
+                </Badge>
+              )}
+            </Link>
+            <Link
+              to="/shop"
+              className="block w-full px-6 py-4 text-base font-medium bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground rounded-lg transition-all duration-300 text-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background min-h-[48px] flex items-center justify-center active:scale-98"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                if (navigator.vibrate && window.innerWidth < 768) {
+                  navigator.vibrate(20);
+                }
+              }}
+              onTouchStart={() => {
+                document.body.style.touchAction = "manipulation";
+              }}
+              onTouchEnd={() => {
+                document.body.style.touchAction = "";
+              }}
+            >
+              Shop Now
+            </Link>
+          </div>
         </div>
       </div>
     </nav>

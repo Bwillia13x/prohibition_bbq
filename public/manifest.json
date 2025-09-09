@@ -1,0 +1,53 @@
+{
+  "name": "Prohibition BBQ - Premium Gangster-Era Sauces",
+  "short_name": "Prohibition BBQ",
+  "description": "Premium BBQ sauces inspired by the legendary figures of the roaring twenties",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f0a",
+  "theme_color": "#8b5a2b",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["food", "shopping", "lifestyle"],
+  "icons": [
+    {
+      "src": "/brand logo/prohibition_bbq_logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand logo/prohibition_bbq_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Sauces",
+      "short_name": "Shop",
+      "description": "Browse our premium BBQ sauce collection",
+      "url": "/shop",
+      "icons": [
+        {
+          "src": "/brand logo/prohibition_bbq_logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Recipes",
+      "short_name": "Recipes",
+      "description": "Discover amazing BBQ recipes",
+      "url": "/recipes",
+      "icons": [
+        {
+          "src": "/brand logo/prohibition_bbq_logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

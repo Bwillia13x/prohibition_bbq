@@ -9,76 +9,113 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors - Rich, premium tones */
-    --background: 20 15% 8%;
-    --foreground: 45 25% 95%;
+    /* Refined Premium Color System - Johnny Ive Inspired */
+    /* Base - Deep, sophisticated neutrals */
+    --background: 215 25% 6%;      /* Richer, more premium dark */
+    --foreground: 40 15% 98%;       /* Slightly warmer white */
 
-    /* Glass morphism cards */
-    --card: 20 15% 12%;
-    --card-foreground: 45 20% 92%;
+    /* Surface hierarchy - More refined glass effects */
+    --card: 215 20% 9%;             /* Deeper card background */
+    --card-foreground: 40 12% 96%;   /* Higher contrast */
 
-    --popover: 20 15% 10%;
-    --popover-foreground: 45 20% 92%;
+    --popover: 215 18% 7%;           /* Consistent with card */
+    --popover-foreground: 40 12% 96%;
 
-    /* Primary - Amber like the BBQ sauce */
-    --primary: 35 85% 55%;
-    --primary-foreground: 20 15% 8%;
+    /* Primary - Refined amber with better contrast */
+    --primary: 32 88% 52%;           /* Slightly deeper amber */
+    --primary-foreground: 215 25% 6%; /* Pure black for contrast */
+
+    /* Secondary - More sophisticated sepia */
+    --secondary: 28 20% 22%;         /* Refined sepia tone */
+    --secondary-foreground: 40 15% 98%;
+
+    /* Tertiary - New layer for depth */
+    --tertiary: 215 15% 12%;         /* Subtle tertiary surface */
+    --tertiary-foreground: 40 10% 92%;
+
+    /* Muted - Sophisticated glass backgrounds */
+    --muted: 215 12% 14%;            /* More refined muted */
+    --muted-foreground: 35 8% 68%;    /* Better readability */
+
+    /* Accent - Premium gold with refinement */
+    --accent: 38 92% 58%;             /* Refined gold */
+    --accent-foreground: 215 25% 6%;
+
+    --destructive: 0 75% 58%;          /* More refined red */
+    --destructive-foreground: 40 15% 98%;
+
+    /* Enhanced border system */
+    --border: 215 12% 18%;            /* More subtle borders */
+    --input: 215 15% 11%;             /* Deeper input background */
+    --ring: 32 88% 52%;               /* Primary ring color */
+
+    --radius: 1.2rem;                  /* More refined radius */
+
+    /* Refined Glass Effects System */
+    --glass-bg: 215 15% 8%;
+    --glass-border: 215 12% 18%;
+    --glass-shadow: 215 20% 4%;
+
+    /* Enhanced Gradient System */
+    --gradient-primary: linear-gradient(135deg, hsl(32 88% 52%), hsl(28 80% 45%));
+    --gradient-glass: linear-gradient(135deg, hsl(215 20% 9% / 0.95), hsl(215 15% 12% / 0.85));
+    --gradient-hero: radial-gradient(ellipse at top, hsl(32 88% 15%) 0%, hsl(215 25% 6%) 50%, hsl(215 20% 4%) 100%);
+    --gradient-tertiary: linear-gradient(135deg, hsl(215 15% 12% / 0.9), hsl(215 12% 14% / 0.8));
+    --gradient-accent: linear-gradient(135deg, hsl(38 92% 58%), hsl(32 88% 52%));
+
+    /* Refined Shadow System */
+    --shadow-glass: 0 8px 32px 0 hsl(215 20% 4% / 0.37);
+    --shadow-glow: 0 0 40px hsl(32 88% 52% / 0.15);
+    --shadow-premium: 0 25px 50px -12px hsl(215 20% 4% / 0.25);
+    --shadow-subtle: 0 4px 16px 0 hsl(215 20% 4% / 0.15);
     
-    /* Secondary - Warm sepia tones */
-    --secondary: 30 25% 25%;
-    --secondary-foreground: 45 25% 95%;
-
-    /* Muted - Glass effect backgrounds */
-    --muted: 20 15% 15%;
-    --muted-foreground: 40 15% 70%;
-
-    /* Accent - Gold highlights */
-    --accent: 40 95% 65%;
-    --accent-foreground: 20 15% 8%;
-
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 45 25% 95%;
-
-    /* Glass borders and inputs */
-    --border: 30 20% 20%;
-    --input: 20 15% 18%;
-    --ring: 35 85% 55%;
-
-    --radius: 1.5rem;
-
-    /* Premium glass effects */
-    --glass-bg: 20 15% 10%;
-    --glass-border: 30 25% 25%;
-    --glass-shadow: 20 15% 5%;
-    
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(35 85% 55%), hsl(25 75% 45%));
-    --gradient-glass: linear-gradient(135deg, hsl(20 15% 12% / 0.9), hsl(30 20% 18% / 0.7));
-    --gradient-hero: radial-gradient(ellipse at top, hsl(35 85% 15%) 0%, hsl(20 15% 8%) 50%, hsl(20 15% 5%) 100%);
-    
-    /* Shadows for liquid glass effect */
-    --shadow-glass: 0 8px 32px 0 hsl(20 15% 5% / 0.37);
-    --shadow-glow: 0 0 40px hsl(35 85% 55% / 0.2);
-    --shadow-premium: 0 25px 50px -12px hsl(20 15% 5% / 0.5);
-    
-    /* Typography - Johnny Ive Inspired */
-    --font-display: 'Playfair Display', serif;
+    /* Refined Typography System - Premium Font Stack */
+    --font-display: 'Playfair Display', 'Times New Roman', serif;
+    --font-heading: 'Inter Display', 'Inter', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
 
-    /* Typography Scale - Golden Ratio Based */
-    --text-xs: 0.75rem;    /* 12px */
-    --text-sm: 0.875rem;   /* 14px */
-    --text-base: 1rem;     /* 16px */
-    --text-lg: 1.125rem;   /* 18px */
-    --text-xl: 1.25rem;    /* 20px */
-    --text-2xl: 1.5rem;    /* 24px */
-    --text-3xl: 1.875rem;  /* 30px */
-    --text-4xl: 2.25rem;   /* 36px */
-    --text-5xl: 3rem;      /* 48px */
-    --text-6xl: 3.75rem;   /* 60px */
-    --text-7xl: 4.5rem;    /* 72px */
-    --text-8xl: 6rem;      /* 96px */
-    --text-9xl: 8rem;      /* 128px */
+    /* Enhanced Typography Scale - More Sophisticated */
+    --text-xs: 0.75rem;      /* 12px - Fine print */
+    --text-sm: 0.875rem;     /* 14px - Captions */
+    --text-base: 1rem;       /* 16px - Body text */
+    --text-lg: 1.125rem;     /* 18px - Large body */
+    --text-xl: 1.25rem;      /* 20px - Small headings */
+    --text-2xl: 1.5rem;      /* 24px - Section headings */
+    --text-3xl: 1.875rem;    /* 30px - Component headings */
+    --text-4xl: 2.25rem;     /* 36px - Page headings */
+    --text-5xl: 3rem;        /* 48px - Hero text */
+    --text-6xl: 3.75rem;     /* 60px - Large hero */
+    --text-7xl: 4.5rem;      /* 72px - XL hero */
+    --text-8xl: 6rem;        /* 96px - XXL hero */
+    --text-9xl: 8rem;        /* 128px - Mega hero */
+
+    /* Typography Weights - Refined */
+    --font-thin: 100;
+    --font-extralight: 200;
+    --font-light: 300;
+    --font-normal: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+    --font-extrabold: 800;
+    --font-black: 900;
+
+    /* Line Heights - More Sophisticated */
+    --leading-none: 1;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+
+    /* Letter Spacing - Precise Control */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.025em;
+    --tracking-normal: 0em;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
 
     /* Spacing Scale - 8px Grid System */
     --space-1: 0.25rem;    /* 4px */
@@ -113,18 +150,34 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
   
-  /* Glass morphism utilities */
+  /* Refined Glass Morphism System - Premium & Performant */
   .glass {
     background: var(--gradient-glass);
-    border: 1px solid hsl(var(--glass-border) / 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.15);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
     box-shadow: var(--shadow-glass);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   .glass-card {
-    @apply glass rounded-3xl;
-    border: 1px solid hsl(var(--border) / 0.1);
+    @apply glass;
+    border-radius: var(--radius);
+    border: 1px solid hsl(var(--border) / 0.08);
+    background: var(--gradient-glass);
+  }
+
+  .glass-card-premium {
+    @apply glass;
+    border-radius: calc(var(--radius) * 1.2);
+    background: linear-gradient(135deg,
+      hsl(var(--card) / 0.95) 0%,
+      hsl(var(--tertiary) / 0.9) 100%);
+    border: 1px solid hsl(var(--border) / 0.12);
+    box-shadow:
+      var(--shadow-glass),
+      0 1px 0 hsl(var(--primary) / 0.05) inset,
+      0 -1px 0 hsl(var(--primary) / 0.03) inset;
   }
   
   .liquid-button {
