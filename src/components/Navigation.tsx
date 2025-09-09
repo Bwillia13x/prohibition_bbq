@@ -108,9 +108,9 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? "glass-card-premium py-3 border-b border-primary/10"
+          ? "glass-card-ultra py-3 border-b border-primary/10 backdrop-blur-xl"
           : "py-6"
       }`}
       role="navigation"
@@ -134,7 +134,7 @@ const Navigation = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-1" role="menubar">
           <button
-            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Products section"
             onClick={handleProductsClick}
@@ -143,7 +143,7 @@ const Navigation = () => {
           </button>
           <Link
             to="/recipes"
-            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Recipes page"
           >
@@ -151,7 +151,7 @@ const Navigation = () => {
           </Link>
           <Link
             to="/wholesale"
-            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Wholesale page"
           >
@@ -159,7 +159,7 @@ const Navigation = () => {
           </Link>
           <Link
             to="/our-story"
-            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Our Story page"
           >
@@ -167,7 +167,7 @@ const Navigation = () => {
           </Link>
           <Link
             to="/contact"
-            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+            className="px-4 py-2 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
             role="menuitem"
             aria-label="Navigate to Contact page"
           >
@@ -249,7 +249,7 @@ const Navigation = () => {
       {/* Mobile Menu - Touch Enhanced */}
       <div
         ref={mobileMenuRef}
-        className={`md:hidden absolute top-full left-0 w-full glass-card-premium border-t border-primary/10 transition-all duration-300 ${
+        className={`md:hidden absolute top-full left-0 w-full glass-card-ultra border-t border-primary/10 transition-all duration-500 backdrop-blur-xl ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible -translate-y-2"
@@ -259,7 +259,7 @@ const Navigation = () => {
       >
         <div className="container mx-auto px-6 py-6 space-y-2">
           <button
-            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98"
+            className="block w-full text-left px-6 py-4 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-all duration-300 hover-scale-subtle focus:outline-none focus:ring-2 focus:ring-primary focus:bg-primary/5 min-h-[48px] flex items-center active:scale-98 animate-fade-in-up"
             role="menuitem"
             onClick={() => {
               handleProductsClick();

@@ -140,7 +140,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body text-rendering-optimize;
     background: var(--gradient-hero);
     min-height: 100vh;
   }
@@ -211,6 +211,78 @@ All colors MUST be HSL.
     border-color: hsl(var(--primary) / 0.5);
     box-shadow: var(--shadow-glass), 0 0 0 2px hsl(var(--primary) / 0.2);
   }
+
+  /* Enhanced accessibility focus states */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .focus-ring-inset {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset;
+  }
+
+  .focus-visible-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .glass-card {
+      border: 2px solid hsl(var(--border));
+      background: hsl(var(--card));
+    }
+
+    .glass-card-premium {
+      border: 2px solid hsl(var(--primary));
+      background: hsl(var(--card));
+    }
+
+    .text-muted-foreground {
+      color: hsl(var(--foreground) / 0.8);
+    }
+  }
+
+  /* Enhanced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-slide-in-left,
+    .animate-slide-in-right,
+    .animate-scale-in,
+    .animate-float-gentle,
+    .animate-pulse-subtle,
+    .animate-glow-soft,
+    .animate-bounce-slow,
+    .animate-pulse-slow,
+    .animate-stagger-1,
+    .animate-stagger-2,
+    .animate-stagger-3,
+    .animate-stagger-4,
+    .animate-stagger-5,
+    .animate-morph,
+    .animate-shimmer,
+    .animate-ripple,
+    .animate-wiggle,
+    .animate-zoom-in,
+    .animate-slide-up-smooth,
+    .animate-fade-in-up,
+    .animate-scale-up {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .hover-lift:hover,
+    .hover-scale-subtle:hover,
+    .hover-morph:hover,
+    .hover-tilt:hover,
+    .hover-slide-up:hover,
+    .hover-rotate:hover,
+    .hover-scale-rotate:hover,
+    .hover-bounce:hover {
+      transform: none !important;
+    }
+  }
   
   /* Navigation link styles */
   .nav-link {
@@ -271,6 +343,77 @@ All colors MUST be HSL.
     animation: pulseSlow 5s ease-in-out infinite;
   }
 
+  /* Enhanced Micro-Animations */
+  .animate-stagger-1 {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.1s;
+  }
+
+  .animate-stagger-2 {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.2s;
+  }
+
+  .animate-stagger-3 {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.3s;
+  }
+
+  .animate-stagger-4 {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.4s;
+  }
+
+  .animate-stagger-5 {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    animation-delay: 0.5s;
+  }
+
+  .animate-morph {
+    animation: morph 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-ripple {
+    animation: ripple 1.5s ease-out infinite;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  .animate-zoom-in {
+    animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .animate-slide-up-smooth {
+    animation: slideUpSmooth 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+
+  .animate-scale-up {
+    animation: scaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
   /* Hover states with Johnny Ive's attention to detail */
   .hover-lift {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -293,6 +436,91 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.08);
   }
 
+  /* Enhanced Interactive Effects */
+  .hover-morph {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-morph:hover {
+    border-radius: 2rem;
+    transform: scale(1.02);
+  }
+
+  .hover-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hover-shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+  }
+
+  .hover-shimmer:hover::before {
+    left: 100%;
+  }
+
+  .hover-ripple {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hover-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .hover-ripple:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hover-tilt {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-tilt:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+  }
+
+  .hover-glow-primary:hover {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1);
+  }
+
+  .hover-glow-accent:hover {
+    box-shadow: 0 0 40px hsl(var(--accent) / 0.3), 0 0 80px hsl(var(--accent) / 0.1);
+  }
+
+  .hover-slide-up:hover {
+    transform: translateY(-4px);
+  }
+
+  .hover-rotate:hover {
+    transform: rotate(2deg);
+  }
+
+  .hover-scale-rotate:hover {
+    transform: scale(1.05) rotate(1deg);
+  }
+
+  .hover-bounce:hover {
+    animation: bounceSlow 0.6s ease-in-out;
+  }
+
   .text-gradient-premium {
     background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)), hsl(var(--accent)));
     background-clip: text;
@@ -308,9 +536,134 @@ All colors MUST be HSL.
     box-shadow: 0 8px 32px hsl(var(--primary) / 0.1);
   }
 
+  /* Enhanced Glass Morphism Variants */
+  .glass-card-ultra {
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.95) 0%,
+      hsl(var(--tertiary) / 0.9) 50%,
+      hsl(var(--card) / 0.85) 100%);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid hsl(var(--border) / 0.15);
+    box-shadow: 
+      var(--shadow-glass),
+      0 1px 0 hsl(var(--primary) / 0.08) inset,
+      0 -1px 0 hsl(var(--accent) / 0.05) inset,
+      0 0 0 1px hsl(var(--primary) / 0.02);
+  }
+
+  .glass-card-floating {
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.9) 0%,
+      hsl(var(--tertiary) / 0.8) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.2);
+    box-shadow: 
+      0 20px 40px -12px hsl(var(--primary) / 0.15),
+      0 8px 16px -8px hsl(var(--accent) / 0.1),
+      0 1px 0 hsl(var(--primary) / 0.1) inset;
+  }
+
+  .glass-card-glow {
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.85) 0%,
+      hsl(var(--tertiary) / 0.75) 100%);
+    backdrop-filter: blur(28px) saturate(150%);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: 
+      0 0 0 1px hsl(var(--primary) / 0.1),
+      0 8px 32px hsl(var(--primary) / 0.2),
+      0 0 60px hsl(var(--primary) / 0.1);
+  }
+
+  .glass-card-minimal {
+    background: linear-gradient(135deg, 
+      hsl(var(--card) / 0.6) 0%,
+      hsl(var(--tertiary) / 0.4) 100%);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid hsl(var(--border) / 0.1);
+    box-shadow: 0 4px 16px hsl(var(--primary) / 0.05);
+  }
+
   .hover-scale-elegant:hover {
     transform: scale(1.02);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Loading States & Skeleton Screens */
+  .skeleton {
+    background: linear-gradient(90deg, 
+      hsl(var(--muted) / 0.3) 25%, 
+      hsl(var(--muted) / 0.5) 50%, 
+      hsl(var(--muted) / 0.3) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-text {
+    height: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skeleton-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .skeleton-circle {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .skeleton-rectangle {
+    border-radius: 0.5rem;
+    height: 8rem;
+  }
+
+  .loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid hsl(var(--muted) / 0.3);
+    border-top: 2px solid hsl(var(--primary));
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .loading-dots {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+
+  .loading-dots span {
+    width: 0.5rem;
+    height: 0.5rem;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    animation: pulse 1.4s ease-in-out infinite both;
+  }
+
+  .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+  .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0s; }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes pulse {
+    0%, 80%, 100% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
   
   /* Johnny Ive Inspired Keyframes */
@@ -418,6 +771,93 @@ All colors MUST be HSL.
       transform: scale(1.05);
     }
   }
+
+  @keyframes morph {
+    0%, 100% {
+      border-radius: 1.2rem;
+      transform: scale(1);
+    }
+    50% {
+      border-radius: 2rem;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  @keyframes wiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(1deg);
+    }
+    75% {
+      transform: rotate(-1deg);
+    }
+  }
+
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideUpSmooth {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
   
   /* Scroll behavior */
   html {
@@ -436,6 +876,58 @@ All colors MUST be HSL.
     backface-visibility: hidden;
   }
 
+  /* Enhanced performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Optimize animations for performance */
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in {
+    will-change: opacity, transform;
+  }
+
+  .hover-lift,
+  .hover-scale-subtle,
+  .hover-morph {
+    will-change: transform;
+  }
+
+  /* Reduce layout shifts */
+  .aspect-ratio-preserve {
+    aspect-ratio: 1;
+  }
+
+  .text-rendering-optimize {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced Typography Refinements */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .font-display {
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 1;
+  }
+
+  .font-body {
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
   /* Enhanced mobile responsiveness */
   @media (max-width: 768px) {
     .glass-card {
@@ -449,6 +941,24 @@ All colors MUST be HSL.
 
     .liquid-button:hover {
       transform: scale(1);
+    }
+
+    /* Mobile typography adjustments */
+    .font-display {
+      font-size: clamp(2rem, 8vw, 4rem);
+      line-height: 1.1;
+    }
+
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+
+  /* Enhanced tablet responsiveness */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .glass-card {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
   }
 

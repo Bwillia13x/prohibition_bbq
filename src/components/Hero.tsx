@@ -42,7 +42,7 @@ const Hero = () => {
           <div className="text-center lg:text-left space-y-12 animate-fade-in">
             <div className="space-y-6">
               <div className="space-y-4">
-                <h1 className="font-display text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight">
+                <h1 className="font-display text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight text-balance">
                   <span
                     className="text-foreground block animate-slide-up"
                     style={{ animationDelay: "0.1s" }}
@@ -101,12 +101,12 @@ const Hero = () => {
 
           {/* Refined Product Showcase */}
           <div
-            className="relative group animate-fade-in"
+            className="relative group animate-fade-in hover-tilt"
             style={{ animationDelay: "0.5s" }}
           >
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-700" />
-              <div className="relative glass-card-premium p-12 lg:p-16 transform group-hover:scale-[1.02] transition-all duration-500 rounded-3xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-700 animate-morph" />
+              <div className="relative glass-card-ultra p-12 lg:p-16 transform group-hover:scale-[1.02] transition-all duration-500 rounded-3xl hover-shimmer">
                 <div className="relative overflow-hidden rounded-2xl">
                   <img
                     src={heroBottles}
@@ -116,14 +116,18 @@ const Hero = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
-                {/* Subtle accent elements */}
+                {/* Enhanced accent elements */}
                 <div
-                  className="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full opacity-60 animate-pulse"
+                  className="absolute top-4 right-4 w-2 h-2 bg-primary rounded-full opacity-60 animate-pulse hover-glow-primary"
                   style={{ animationDelay: "1s" }}
                 />
                 <div
-                  className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-accent rounded-full opacity-40 animate-pulse"
+                  className="absolute bottom-4 left-4 w-1.5 h-1.5 bg-accent rounded-full opacity-40 animate-pulse hover-glow-accent"
                   style={{ animationDelay: "2s" }}
+                />
+                <div
+                  className="absolute top-1/2 left-4 w-1 h-1 bg-primary/30 rounded-full opacity-0 group-hover:opacity-100 animate-ripple"
+                  style={{ animationDelay: "3s" }}
                 />
               </div>
             </div>

@@ -77,7 +77,7 @@ const ProductGrid = () => {
         {/* Refined Section Header */}
         <div className="text-center mb-24 space-y-8">
           <div className="space-y-4">
-            <h2 className="font-display text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight animate-fade-in">
+            <h2 className="font-display text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight animate-fade-in text-balance">
               <span className="text-foreground block">Meet the</span>
               <span
                 className="text-primary block animate-slide-up"
@@ -117,15 +117,15 @@ const ProductGrid = () => {
               tabIndex={0}
             >
               <PremiumCard3D intensity={8}>
-                <article className="glass-card-premium p-8 rounded-2xl">
+                <article className="glass-card-floating p-8 rounded-2xl hover-morph hover-glow-primary">
                   {/* Product Image with Lazy Loading */}
-                  <div className="relative mb-8 overflow-hidden rounded-xl group/image">
+                  <div className="relative mb-8 overflow-hidden rounded-xl group/image hover-ripple">
                     <LazyImage
                       src={product.image}
                       alt={`${product.name} ${
                         product.subtitle
                       } sauce bottle - Premium BBQ sauce with ${product.description.toLowerCase()}`}
-                      className="w-full h-80 rounded-xl"
+                      className="w-full h-80 rounded-xl transform group-hover:scale-110 transition-transform duration-700"
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       quality={85}
                       priority={index < 3} // Prioritize first 3 products
@@ -138,18 +138,21 @@ const ProductGrid = () => {
                       }`}
                     />
 
-                    {/* Subtle overlay with product info */}
+                    {/* Enhanced overlay with product info */}
                     <div
-                      className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-opacity duration-500 ${
+                      className={`absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent transition-all duration-500 ${
                         prefersReducedMotion
-                          ? "opacity-100"
-                          : "opacity-0 group-hover:opacity-100"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0"
                       }`}
                     >
-                      <div className="text-white text-sm font-medium">
+                      <div className="text-white text-sm font-medium animate-fade-in-up">
                         {product.subtitle}
                       </div>
                     </div>
+
+                    {/* Shimmer effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </div>
 
                   {/* Product Information */}
@@ -211,34 +214,34 @@ const ProductGrid = () => {
 
         {/* Collection CTA */}
         <div className="text-center">
-          <div className="glass-card-premium p-12 max-w-3xl mx-auto">
+          <div className="glass-card-glow p-12 max-w-3xl mx-auto hover-morph hover-glow-primary">
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="font-display text-3xl lg:text-4xl font-bold text-foreground">
+                <h3 className="font-display text-3xl lg:text-4xl font-bold text-foreground animate-fade-in-up">
                   Complete Your Collection
                 </h3>
-                <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto" />
+                <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto animate-scale-in" />
               </div>
 
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
                 Save 20% when you purchase all three legendary sauces together.
                 The ultimate collection for the discerning BBQ enthusiast.
               </p>
 
-              <div className="pt-4">
+              <div className="pt-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
                 <div className="flex items-center justify-center gap-4 mb-3">
-                  <span className="text-2xl font-bold text-primary">
+                  <span className="text-2xl font-bold text-primary animate-pulse-subtle">
                     $29.99
                   </span>
                   <span className="text-sm text-muted-foreground line-through">
                     $38.97
                   </span>
-                  <span className="px-2 py-1 bg-accent/20 text-accent text-xs font-medium rounded-full">
+                  <span className="px-2 py-1 bg-accent/20 text-accent text-xs font-medium rounded-full animate-bounce-slow">
                     Save 23%
                   </span>
                 </div>
                 <Button
-                  className="px-12 py-4 text-lg font-medium bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] rounded-xl"
+                  className="px-12 py-4 text-lg font-medium bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground transition-all duration-300 hover:scale-[1.02] rounded-xl hover-shimmer hover-glow-primary"
                   aria-label="Purchase all three sauces as a bundle for $29.99 - Limited time offer"
                   onClick={(e) => {
                     const button = e.currentTarget as HTMLButtonElement;
