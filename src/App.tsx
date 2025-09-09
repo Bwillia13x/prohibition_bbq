@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/CartContext";
+import { ScrollProgress } from "./components/ScrollEffects";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <CartProvider>
       <TooltipProvider>
+        <ScrollProgress />
         <Toaster />
         <Sonner />
         <BrowserRouter>

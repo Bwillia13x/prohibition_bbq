@@ -1,10 +1,11 @@
 const Footer = () => {
   return (
-    <footer className="py-20 mt-32 glass-card relative overflow-hidden">
-      {/* Background decoration */}
+    <footer className="py-20 mt-32 glass-card-ultra relative overflow-hidden">
+      {/* Enhanced background decoration */}
       <div className="absolute inset-0 bg-gradient-to-t from-background/5 to-transparent" />
-      <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl opacity-30" />
-      <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl opacity-20" />
+      <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl opacity-30 animate-pulse-slow" />
+      <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-accent/5 rounded-full blur-3xl opacity-20 animate-pulse-slow" />
+      <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-primary/3 rounded-full blur-2xl opacity-40 animate-float-gentle" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-12">
@@ -20,7 +21,7 @@ const Footer = () => {
             <div className="flex space-x-8 mb-8">
               <a
                 href="#"
-                className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
+                className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover-rotate focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
                 aria-label="Follow us on Twitter"
               >
                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -29,7 +30,7 @@ const Footer = () => {
               </a>
               <a
                 href="#"
-                className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
+                className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover-rotate focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
                 aria-label="Follow us on Instagram"
               >
                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
@@ -37,7 +38,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a
-                href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
+                href="#" className="text-muted-foreground hover:text-primary transition-all duration-300 hover:scale-110 hover:-translate-y-1 hover-rotate focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded-lg p-2"
                 aria-label="Follow us on Pinterest"
               >
                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
